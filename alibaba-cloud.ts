@@ -16,6 +16,12 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 const BASE_URL = "https://coding-intl.dashscope.aliyuncs.com/v1";
 const API_KEY_ENV = "DASHSCOPE_API_KEY";
 
+// Whether to attempt dynamic model discovery via /v1/models.
+// The coding-intl endpoint (Alibaba Cloud Coding Plan) does NOT expose /v1/models,
+// so this should be left false for coding-plan keys (sk-sp-*). Set to true only
+// if you are using a standard DashScope API key against the compatible-mode endpoint.
+const FETCH_MODELS = false;
+
 // Keywords that indicate a model is NOT a chat / text-completion model.
 const NON_CHAT_KEYWORDS = [
 	"embedding",
@@ -40,24 +46,29 @@ const NON_CHAT_KEYWORDS = [
 	"qwen-omni",
 ];
 
-// Known DashScope chat models with sensible defaults (fallback when API key is missing or fetch fails)
-const FALLBACK_MODELS: {
+// Models available on the Alibaba Cloud Coding Plan (coding-intl endpoint).
+// The coding-intl endpoint does not expose /v1/models, so this list is the
+// authoritative source. Keep it in sync with the Coding Plan dashboard.
+const CODING_PLAN_MODELS: {
 	id: string;
 	name: string;
 	reasoning: boolean;
 	contextWindow: number;
 	maxTokens: number;
 }[] = [
-	{ id: "qwen-max", name: "Qwen Max", reasoning: true, contextWindow: 32_768, maxTokens: 8192 },
-	{ id: "qwen-max-latest", name: "Qwen Max (latest)", reasoning: true, contextWindow: 32_768, maxTokens: 8192 },
-	{ id: "qwen-plus", name: "Qwen Plus", reasoning: true, contextWindow: 131_072, maxTokens: 8192 },
-	{ id: "qwen-plus-latest", name: "Qwen Plus (latest)", reasoning: true, contextWindow: 131_072, maxTokens: 8192 },
-	{ id: "qwen-turbo", name: "Qwen Turbo", reasoning: false, contextWindow: 131_072, maxTokens: 8192 },
-	{ id: "qwen-turbo-latest", name: "Qwen Turbo (latest)", reasoning: false, contextWindow: 131_072, maxTokens: 8192 },
-	{ id: "qwen-coder-plus", name: "Qwen Coder Plus", reasoning: true, contextWindow: 131_072, maxTokens: 8192 },
-	{ id: "qwen-coder-plus-latest", name: "Qwen Coder Plus (latest)", reasoning: true, contextWindow: 131_072, maxTokens: 8192 },
-	{ id: "deepseek-v3", name: "DeepSeek V3", reasoning: true, contextWindow: 64_000, maxTokens: 8192 },
-	{ id: "deepseek-r1", name: "DeepSeek R1", reasoning: true, contextWindow: 64_000, maxTokens: 8192 },
+	// Qwen family
+	{ id: "qwen3.6-plus", name: "Qwen 3.6 Plus", reasoning: true, contextWindow: 131_072, maxTokens: 16_384 },
+	{ id: "qwen3.5-plus", name: "Qwen 3.5 Plus", reasoning: true, contextWindow: 131_072, maxTokens: 16_384 },
+	{ id: "qwen3-max-2026-01-23", name: "Qwen 3 Max", reasoning: true, contextWindow: 32_768, maxTokens: 8_192 },
+	{ id: "qwen3-coder-next", name: "Qwen 3 Coder Next", reasoning: false, contextWindow: 131_072, maxTokens: 16_384 },
+	{ id: "qwen3-coder-plus", name: "Qwen 3 Coder Plus", reasoning: false, contextWindow: 131_072, maxTokens: 16_384 },
+	// Zhipu family
+	{ id: "glm-5", name: "GLM 5", reasoning: true, contextWindow: 128_000, maxTokens: 16_384 },
+	{ id: "glm-4.7", name: "GLM 4.7", reasoning: true, contextWindow: 128_000, maxTokens: 16_384 },
+	// Kimi family
+	{ id: "kimi-k2.5", name: "Kimi K2.5", reasoning: true, contextWindow: 131_072, maxTokens: 16_384 },
+	// MiniMax family
+	{ id: "MiniMax-M2.5", name: "MiniMax M2.5", reasoning: true, contextWindow: 1_048_576, maxTokens: 16_384 },
 ];
 
 interface DashScopeModel {
@@ -75,7 +86,7 @@ function isChatModel(id: string): boolean {
 }
 
 function getModelDefaults(id: string) {
-	const known = FALLBACK_MODELS.find((m) => m.id === id);
+	const known = CODING_PLAN_MODELS.find((m) => m.id === id);
 	if (known) {
 		return {
 			contextWindow: known.contextWindow,
@@ -102,7 +113,7 @@ export default async function (pi: ExtensionAPI) {
 		maxTokens: number;
 	}[] = [];
 
-	if (apiKey) {
+	if (apiKey && FETCH_MODELS) {
 		try {
 			const res = await fetch(`${BASE_URL}/models`, {
 				headers: {
@@ -137,10 +148,10 @@ export default async function (pi: ExtensionAPI) {
 		}
 	}
 
-	// If the API key is missing or the fetch failed, fall back to the static list
-	// so the provider is still available for /model selection.
+	// If dynamic discovery is disabled or the fetch failed, use the curated
+	// Coding Plan model list.
 	if (models.length === 0) {
-		models = FALLBACK_MODELS.map((m) => ({
+		models = CODING_PLAN_MODELS.map((m) => ({
 			id: m.id,
 			name: m.name,
 			reasoning: m.reasoning,

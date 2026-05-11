@@ -1,0 +1,23 @@
+{
+  "name": "pi-alibaba-dashscope",
+  "version": "1.0.0",
+  "description": "Alibaba Cloud (DashScope) provider extension for pi-agent",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "alibaba-cloud",
+    "dashscope",
+    "qwen"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harms-haus/pi-alibaba-dashscope"
+  },
+  "pi": {
+    "extensions": [
+      "./alibaba-cloud.ts"
+    ]
+  }
+}

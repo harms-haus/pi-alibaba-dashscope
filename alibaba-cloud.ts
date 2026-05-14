@@ -61,27 +61,28 @@ const CODING_PLAN_MODELS: {
 	thinkingFormat?: "qwen" | "deepseek";
 }[] = [
 	// ---- Qwen 3.6 ----
-	{ id: "qwen3.6-max-preview", name: "Qwen 3.6 Max Preview", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.6-max-preview", name: "Qwen 3.6 Max Preview", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
 	{ id: "qwen3.6-plus", name: "Qwen 3.6 Plus", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.6-plus-2026-04-02", name: "Qwen 3.6 Plus (2026-04-02)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.6-flash", name: "Qwen 3.6 Flash", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.6-flash-2026-04-16", name: "Qwen 3.6 Flash (2026-04-16)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.6-plus-2026-04-02", name: "Qwen 3.6 Plus (2026-04-02)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.6-flash", name: "Qwen 3.6 Flash", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.6-flash-2026-04-16", name: "Qwen 3.6 Flash (2026-04-16)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
 	// ---- Qwen 3.5 ----
 	{ id: "qwen3.5-plus", name: "Qwen 3.5 Plus", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.5-plus-2026-02-15", name: "Qwen 3.5 Plus (2026-02-15)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.5-flash", name: "Qwen 3.5 Flash", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.5-flash-2026-02-23", name: "Qwen 3.5 Flash (2026-02-23)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.5-397b-a17b", name: "Qwen 3.5 397B-A17B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.5-122b-a10b", name: "Qwen 3.5 122B-A10B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.5-27b", name: "Qwen 3.5 27B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
-	{ id: "qwen3.5-35b-a3b", name: "Qwen 3.5 35B-A3B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.5-plus-2026-02-15", name: "Qwen 3.5 Plus (2026-02-15)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.5-flash", name: "Qwen 3.5 Flash", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.5-flash-2026-02-23", name: "Qwen 3.5 Flash (2026-02-23)", reasoning: true, contextWindow: 1_048_576, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.5-397b-a17b", name: "Qwen 3.5 397B-A17B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.5-122b-a10b", name: "Qwen 3.5 122B-A10B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.5-27b", name: "Qwen 3.5 27B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
+	// { id: "qwen3.5-35b-a3b", name: "Qwen 3.5 35B-A3B", reasoning: true, contextWindow: 262_144, maxTokens: 65_536, thinkingFormat: "qwen" },
 	// ---- DeepSeek ----
-	{ id: "deepseek-v4-pro", name: "DeepSeek V4 Pro", reasoning: true, contextWindow: 1_048_576, maxTokens: 393_216, thinkingFormat: "deepseek" },
-	{ id: "deepseek-v4-flash", name: "DeepSeek V4 Flash", reasoning: true, contextWindow: 1_048_576, maxTokens: 393_216, thinkingFormat: "deepseek" },
+	// { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro", reasoning: true, contextWindow: 1_048_576, maxTokens: 393_216, thinkingFormat: "deepseek" },
+	// { id: "deepseek-v4-flash", name: "DeepSeek V4 Flash", reasoning: true, contextWindow: 1_048_576, maxTokens: 393_216, thinkingFormat: "deepseek" },
 	// ---- Zhipu ----
-	{ id: "glm-5.1", name: "GLM 5.1", reasoning: true, contextWindow: 202_752, maxTokens: 131_072 },
+	{ id: "glm-5", name: "GLM 5", reasoning: true, contextWindow: 202_752, maxTokens: 131_072 },
+	{ id: "glm-4.7", name: "GLM 4.7", reasoning: true, contextWindow: 202_752, maxTokens: 131_072 },
 	// ---- Kimi ----
-	{ id: "kimi-k2.6", name: "Kimi K2.6", reasoning: true, contextWindow: 262_144, maxTokens: 98_304 },
+	{ id: "kimi-k2.5", name: "Kimi K2.5", reasoning: true, contextWindow: 262_144, maxTokens: 98_304 },
 	// ---- MiniMax ----
 	{ id: "MiniMax-M2.5", name: "MiniMax M2.5", reasoning: true, contextWindow: 196_608, maxTokens: 32_768 },
 ];

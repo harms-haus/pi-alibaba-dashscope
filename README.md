@@ -1,6 +1,6 @@
 # pi-alibaba-dashscope
 
-Alibaba Cloud (DashScope) provider extension for pi-agent.
+Alibaba Cloud (DashScope) provider extension for [pi-agent](https://github.com/earendil-works/pi-coding-agent).
 
 ## Install
 
@@ -23,10 +23,22 @@ Then select an Alibaba Cloud model via `/model` or `Ctrl+L`.
 
 ## Supported Models
 
-This extension queries the DashScope `/v1/models` endpoint to discover available chat models dynamically. Models like Qwen Max, Qwen Plus, Qwen Turbo, and DeepSeek (V3 & R1) are available when listed by the API.
+This extension provides a curated set of models available on the Alibaba Cloud **Coding Plan** (coding-intl endpoint). Models are registered statically — no dynamic discovery is performed.
 
-## Provider Name
+| Model | Context Window | Max Output | Multimodal | Reasoning |
+|---|---|---|---|---|
+| Qwen 3.6 Plus | 1M | 65K | ✅ | ✅ |
+| Qwen 3.5 Plus | 1M | 65K | ✅ | ✅ |
+| GLM 5 | 200K | 131K | ✅ | ✅ |
+| GLM 4.7 | 200K | 131K | ✅ | ✅ |
+| Kimi K2.5 | 262K | 98K | ❌ | ✅ |
+| MiniMax M2.5 | 196K | 32K | ❌ | ✅ |
 
-- Extension id: `alibaba-cloud`
-- API Key env var: `DASHSCOPE_API_KEY`
-- Endpoint: `https://coding-intl.dashscope.aliyuncs.com/v1`
+## Development
+
+```bash
+npm install        # install dev dependencies
+npm run typecheck  # check TypeScript types
+npm run lint       # run ESLint
+npm test           # run tests
+```

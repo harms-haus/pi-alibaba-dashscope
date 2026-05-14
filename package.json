@@ -2,6 +2,8 @@
   "name": "pi-alibaba-dashscope",
   "version": "1.0.0",
   "description": "Alibaba Cloud (DashScope) provider extension for pi-agent",
+  "type": "module",
+  "main": "src/index.ts",
   "keywords": [
     "pi-package",
     "pi-extension",
@@ -15,9 +17,26 @@
     "type": "git",
     "url": "https://github.com/harms-haus/pi-alibaba-dashscope"
   },
+  "scripts": {
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "typescript-eslint": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
   "pi": {
     "extensions": [
-      "./alibaba-cloud.ts"
+      "./src/index.ts"
     ]
   }
 }

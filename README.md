@@ -37,8 +37,15 @@ This extension provides a curated set of models available on the Alibaba Cloud *
 ## Development
 
 ```bash
-npm install        # install dev dependencies
-npm run typecheck  # check TypeScript types
-npm run lint       # run ESLint
-npm test           # run tests
+npm install              # install dev dependencies
+npm run format           # format code with Prettier
+npm run format:check     # check formatting
+npm run typecheck        # check TypeScript types
+npm run lint             # run ESLint
+npm test                 # run tests
+npm run test:coverage    # run tests with coverage
 ```
+
+## License
+
+[MIT](./LICENSE)
